@@ -1,1 +1,10 @@
-<?php require_once __DIR__.'/../config/app.php';require_once __DIR__.'/../config/database.php';if(!empty($_SESSION['user']['id'])){$q=$pdo->prepare('INSERT INTO log_aktivitas(user_id,aktivitas) VALUES(?,?)');$q->execute([$_SESSION['user']['id'],'Logout']);}$_SESSION=[];session_destroy();header('Location: '.BASE_URL.'/auth/login.php');exit;
+<?php require_once __DIR__ . '/../config/app.php';
+require_once __DIR__ . '/../config/database.php';
+if (!empty($_SESSION['user']['id'])) {
+    $q = $pdo->prepare('INSERT INTO log_aktivitas(user_id,aktivitas) VALUES(?,?)');
+    $q->execute([$_SESSION['user']['id'], 'Logout']);
+}
+$_SESSION = [];
+session_destroy();
+header('Location: ' . BASE_URL . '/auth/login.php');
+exit;

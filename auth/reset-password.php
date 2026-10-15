@@ -1,1 +1,6 @@
-<?php require_once __DIR__.'/../config/app.php';$pageTitle='Reset kata sandi';require __DIR__.'/../includes/header.php';?><section class="card auth"><h1>Reset kata sandi</h1><p>Fitur reset email belum diaktifkan. Hubungi administrator.</p><a href="login.php">Kembali ke halaman masuk</a></section><?php require __DIR__.'/../includes/footer.php';?>
+<?php require_once __DIR__ . '/../config/app.php';
+$pageTitle = 'Reset kata sandi';
+require __DIR__ . '/../includes/header.php'; ?><section class="card auth">
+    <h1>Reset kata sandi</h1>
+    <p>Fitur reset email belum diaktifkan. Hubungi administrator.</p><a href="login.php">Kembali ke halaman masuk</a>
+</section><?php require __DIR__ . '/../includes/footer.php'; ?>

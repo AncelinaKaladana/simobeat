@@ -1,14 +1,67 @@
 <?php
-require_once __DIR__.'/../includes/user-check.php';
-$userId=(int)$_SESSION['user']['id'];
-$q=$pdo->prepare('SELECT COUNT(*) FROM diagnosis WHERE user_id=?');$q->execute([$userId]);$count=(int)$q->fetchColumn();
-$q=$pdo->prepare('SELECT d.id,d.hasil,d.created_at,m.nama motor_nama,m.merek,m.tahun,k.nama kerusakan_nama FROM diagnosis d JOIN motor m ON m.id=d.motor_id LEFT JOIN kerusakan k ON k.id=d.kerusakan_id WHERE d.user_id=? ORDER BY d.created_at DESC,d.id DESC LIMIT 1');$q->execute([$userId]);$latest=$q->fetch();
-$page_title='Dashboard';require __DIR__.'/../includes/header.php';
+require_once __DIR__ . '/../includes/user-check.php';
+$userId = (int)$_SESSION['user']['id'];
+$q = $pdo->prepare('SELECT COUNT(*) FROM diagnosis WHERE user_id=?');
+$q->execute([$userId]);
+$count = (int)$q->fetchColumn();
+$q = $pdo->prepare('SELECT d.id,d.hasil,d.created_at,m.nama motor_nama,m.merek,m.tahun,k.nama kerusakan_nama FROM diagnosis d JOIN motor m ON m.id=d.motor_id LEFT JOIN kerusakan k ON k.id=d.kerusakan_id WHERE d.user_id=? ORDER BY d.created_at DESC,d.id DESC LIMIT 1');
+$q->execute([$userId]);
+$latest = $q->fetch();
+$page_title = 'Dashboard';
+require __DIR__ . '/../includes/header.php';
 ?>
-<section class="app-content-header"><div class="container-fluid"><h3>Selamat datang, <?= e($_SESSION['user']['nama']) ?></h3><p class="text-body-secondary mb-0">Sistem Pakar Diagnosis Sepeda Motor</p></div></section>
-<section class="content"><div class="container-fluid"><div class="row g-3">
-<div class="col-lg-8"><div class="card text-bg-primary h-100"><div class="card-body p-4"><div class="d-flex gap-3 align-items-start"><i class="bi bi-tools fs-1"></i><div><h2 class="h4">Diagnosis Motor</h2><p class="mb-4">Periksa kemungkinan kerusakan motor Anda dengan menjawab pertanyaan gejala.</p><a class="btn btn-light" href="diagnosis/index.php"><i class="bi bi-play-fill me-1"></i>Mulai Diagnosis</a></div></div></div></div></div>
-<div class="col-lg-4"><div class="card h-100"><div class="card-body"><div class="text-body-secondary">Riwayat diagnosis</div><div class="display-5 fw-semibold"><?= $count ?> kali</div><a href="riwayat.php" class="btn btn-outline-primary mt-2">Lihat riwayat</a></div></div></div>
-<div class="col-lg-8"><div class="card"><div class="card-header"><h3 class="card-title">Diagnosis terakhir</h3></div><div class="card-body"><?php if($latest): ?><div class="d-flex justify-content-between align-items-center flex-wrap gap-2"><div><div class="fw-semibold"><?= e($latest['kerusakan_nama']??$latest['hasil']) ?></div><div class="small text-body-secondary"><?= e($latest['merek'].' '.$latest['motor_nama'].($latest['tahun']?' '.$latest['tahun']:'')) ?> · <?= e(date('d-m-Y H:i',strtotime($latest['created_at']))) ?></div></div><a class="btn btn-sm btn-outline-primary" href="hasil-diagnosis.php?id=<?= (int)$latest['id'] ?>">Buka hasil</a></div><?php else: ?><p class="mb-0 text-body-secondary">Belum ada diagnosis. Mulai diagnosis pertama Anda.</p><?php endif ?></div></div></div>
-<div class="col-lg-4"><div class="card"><div class="card-header"><h3 class="card-title">Akun</h3></div><div class="card-body"><p class="mb-2"><?= e($_SESSION['user']['email']) ?></p><a href="profil.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-person me-1"></i>Profil</a> <a href="<?= BASE_URL ?>/auth/logout.php" class="btn btn-outline-danger btn-sm">Keluar</a></div></div></div>
-</div></div></section><?php require __DIR__.'/../includes/footer.php'; ?>
+<section class="app-content-header">
+    <div class="container-fluid">
+        <h3>Selamat datang, <?= e($_SESSION['user']['nama']) ?></h3>
+        <p class="text-body-secondary mb-0">Sistem Pakar Diagnosis Sepeda Motor</p>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row g-3">
+            <div class="col-lg-8">
+                <div class="card text-bg-primary h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex gap-3 align-items-start"><i class="bi bi-tools fs-1"></i>
+                            <div>
+                                <h2 class="h4">Diagnosis Motor</h2>
+                                <p class="mb-4">Periksa kemungkinan kerusakan motor Anda dengan menjawab pertanyaan gejala.</p><a class="btn btn-light" href="diagnosis/index.php"><i class="bi bi-play-fill me-1"></i>Mulai Diagnosis</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="text-body-secondary">Riwayat diagnosis</div>
+                        <div class="display-5 fw-semibold"><?= $count ?> kali</div><a href="riwayat.php" class="btn btn-outline-primary mt-2">Lihat riwayat</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Diagnosis terakhir</h3>
+                    </div>
+                    <div class="card-body"><?php if ($latest): ?><div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                <div>
+                                    <div class="fw-semibold"><?= e($latest['kerusakan_nama'] ?? $latest['hasil']) ?></div>
+                                    <div class="small text-body-secondary"><?= e($latest['merek'] . ' ' . $latest['motor_nama'] . ($latest['tahun'] ? ' ' . $latest['tahun'] : '')) ?> · <?= e(date('d-m-Y H:i', strtotime($latest['created_at']))) ?></div>
+                                </div><a class="btn btn-sm btn-outline-primary" href="hasil-diagnosis.php?id=<?= (int)$latest['id'] ?>">Buka hasil</a>
+                            </div><?php else: ?><p class="mb-0 text-body-secondary">Belum ada diagnosis. Mulai diagnosis pertama Anda.</p><?php endif ?></div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Akun</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-2"><?= e($_SESSION['user']['email']) ?></p><a href="profil.php" class="btn btn-outline-secondary btn-sm"><i class="bi bi-person me-1"></i>Profil</a> <a href="<?= BASE_URL ?>/auth/logout.php" class="btn btn-outline-danger btn-sm">Keluar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><?php require __DIR__ . '/../includes/footer.php'; ?>

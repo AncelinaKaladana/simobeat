@@ -18,7 +18,7 @@ $pageTitle = $page_title ?? $pageTitle ?? APP_NAME;
   <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/custom.css">
 </head>
 
-<body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+<body class="layout-fixed sidebar-expand-lg bg-body-tertiary <?= e($bodyClass ?? '') ?>">
   <div class="app-wrapper">
     <?php require __DIR__ . '/navbar.php'; ?>
     <?php if (($_SESSION['user']['role'] ?? '') === 'admin') {

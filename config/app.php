@@ -1,1 +1,1 @@
-<?php if(session_status()!==PHP_SESSION_ACTIVE)session_start();define('APP_NAME','Sistem Pakar Diagnosis Motor');define('BASE_URL','/edukasicode');date_default_timezone_set('Asia/Jakarta');
+<?php if(session_status()!==PHP_SESSION_ACTIVE)session_start();define('APP_NAME','Sistem Pakar Diagnosis Motor');define('BASE_URL','/simobeat');date_default_timezone_set('Asia/Jakarta');

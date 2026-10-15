@@ -1,0 +1,1 @@
+<?php function required(string $v,string $l):string{return trim($v)===''?"$l wajib diisi":'';}function valid_email(string $v):bool{return(bool)filter_var($v,FILTER_VALIDATE_EMAIL);}function post_string(string $k):string{return trim((string)($_POST[$k]??''));}

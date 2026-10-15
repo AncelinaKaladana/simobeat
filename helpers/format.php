@@ -1,0 +1,1 @@
+<?php function tanggal(?string $v):string{return $v?date('d-m-Y H:i',strtotime($v)):'-';}function rupiah(float $v):string{return 'Rp '.number_format($v,0,',','.');}

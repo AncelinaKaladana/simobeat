@@ -1,0 +1,7 @@
+<?php
+require_once __DIR__.'/../../includes/user-check.php';
+$motors=$pdo->query('SELECT id,kode,nama,merek,tahun FROM motor ORDER BY merek,nama,tahun')->fetchAll();
+$page_title='Mulai Diagnosis';require __DIR__.'/../../includes/header.php';require __DIR__.'/../../includes/flash-message.php';
+?>
+<section class="app-content-header"><div class="container-fluid"><h3>Mulai Diagnosis</h3><p class="text-body-secondary">Pilih motor yang ingin diperiksa. Jawaban gejala akan disimpan selama sesi diagnosis.</p></div></section>
+<section class="content"><div class="container-fluid"><div class="card"><div class="card-header"><h3 class="card-title">Pilih Motor</h3></div><div class="card-body"><?php if(!$motors): ?><div class="alert alert-warning mb-0">Data motor belum tersedia. Silakan hubungi administrator.</div><?php else: ?><form method="post" action="mulai.php"><?= csrf_field() ?><div class="mb-3"><label class="form-label" for="motor_id">Motor</label><select class="form-select" id="motor_id" name="motor_id" required><option value="">Pilih motor</option><?php foreach($motors as $m): ?><option value="<?= (int)$m['id'] ?>"><?= e($m['merek'].' '.$m['nama'].($m['tahun']?' · '.$m['tahun']:'')) ?> (<?= e($m['kode']) ?>)</option><?php endforeach ?></select></div><button class="btn btn-primary" type="submit"><i class="bi bi-play-fill me-1"></i>Mulai Diagnosis</button></form><?php endif ?></div></div></div></section><?php require __DIR__.'/../../includes/footer.php'; ?>

@@ -1,0 +1,1 @@
+<?php require_once __DIR__.'/../../includes/admin-check.php';if($_SERVER['REQUEST_METHOD']!=='POST')redirect('/admin/motor/index.php');verify_csrf();$q=$pdo->prepare('DELETE FROM motor WHERE id=?');$q->execute([(int)($_POST['id']??0)]);log_activity($pdo,(int)$_SESSION['user']['id'],'Hapus motor');flash('success','Data dihapus.');redirect('/admin/motor/index.php');

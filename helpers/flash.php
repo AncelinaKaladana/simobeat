@@ -1,0 +1,1 @@
+<?php function flash(string $t,string $m):void{$_SESSION['_flash']=['type'=>$t,'message'=>$m];}function take_flash():?array{$f=$_SESSION['_flash']??null;unset($_SESSION['_flash']);return $f;}

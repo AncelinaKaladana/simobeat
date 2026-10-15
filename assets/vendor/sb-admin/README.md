@@ -1,0 +1,1 @@
+SB Admin 2 dan dependensi vendor yang sudah ada pada proyek tetap dipertahankan di assets/css, assets/js, dan assets/vendor. Folder ini adalah ruang untuk aset tambahan khusus integrasi SB Admin agar file vendor yang sudah ada tidak diduplikasi.

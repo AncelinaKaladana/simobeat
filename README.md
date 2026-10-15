@@ -1,10 +1,4 @@
-# Sistem Pakar Diagnosis Kerusakan Motor
 
-Aplikasi PHP 8+ dan MySQL/MariaDB untuk pengelolaan basis pengetahuan motor, gejala, kerusakan, solusi, aturan Forward Chaining, dan riwayat diagnosis.
-
-## Menjalankan pada XAMPP
-1. Letakkan folder pada `C:\\xampp\\htdocs\\edukasicode` sehingga alamat proyek menjadi `http://localhost/edukasicode/`.
-2. Nyalakan Apache dan MySQL dari XAMPP.
 3. Buka phpMyAdmin, buat database bernama persis `dbs_simobeat`.
 4. Pilih database itu, lalu impor `database/database.sql` dan `database/seed.sql` secara berurutan. Seed menambahkan 3 motor, 6 gejala, 3 kerusakan, solusi, serta aturan contoh.
 5. Pengaturan XAMPP default ada di `config/koneksi.php`. Kredensial dapat diubah dengan environment `DB_HOST`, `DB_NAME`, `DB_USER`, dan `DB_PASS`.

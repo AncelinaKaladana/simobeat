@@ -1,10 +1,4 @@
 
-3. Buka phpMyAdmin, buat database bernama persis `dbs_simobeat`.
-4. Pilih database itu, lalu impor `database/database.sql` dan `database/seed.sql` secara berurutan. Seed menambahkan 3 motor, 6 gejala, 3 kerusakan, solusi, serta aturan contoh.
-5. Pengaturan XAMPP default ada di `config/koneksi.php`. Kredensial dapat diubah dengan environment `DB_HOST`, `DB_NAME`, `DB_USER`, dan `DB_PASS`.
-6. Buat admin awal dengan membuka `/setup-admin.php` satu kali. Akunnya `admin@edukasicode.local` dengan kata sandi awal `admin123`. Setelah berhasil, segera hapus `setup-admin.php`. File setup awal sudah dijalankan dan dihapus dari salinan proyek ini; admin tersebut sudah dibuat pada database lokal.
-7. Masuk melalui `/auth/login.php`. Pengguna baru dapat mendaftar; role pendaftaran selalu `user`, dan password disimpan melalui `password_hash()`.
-
 ## Modul
 - Admin mengelola motor, gejala, kerusakan, solusi, aturan, pengguna, diagnosis, dan laporan.
 - Setiap aturan mempunyai satu kerusakan dan beberapa gejala wajib di `aturan_detail`.
